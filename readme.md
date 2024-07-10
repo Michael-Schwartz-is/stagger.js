@@ -5,6 +5,7 @@ A Simple Solution for Webflow Animations
 ## Introduction
 
 Hey there, Webflow friend 👋
+
 If you've been working with Webflow for a while, you might have noticed something: the more animations you add using Webflow's built-in interactions, the slower your site gets. It's because each interaction adds to the webflow.js file, and that can really bog things down.
 
 We ran into this problem ourselves and started looking for a better way. That's how we came up with Stagger.js. It's a tool that works with Webflow to give you those nice, staggered animations without slowing down your site.
