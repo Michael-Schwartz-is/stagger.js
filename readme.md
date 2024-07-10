@@ -35,6 +35,8 @@ Here's the deal: Stagger.js lets you add scrolling animations to your Webflow si
 <script src="https://cdn.jsdelivr.net/npm/staggerd-js@latest/stagger.js"></script>
 ```
 
+it should look like that:
+
 ![Image](paste.png)
 
 ## Usage
@@ -48,6 +50,8 @@ Add the `data-stagger` attribute to any element you want to animate:
 <div data-stagger="2">I'll animate second</div>
 <div data-stagger="3">I'll animate third</div>
 ```
+
+it should look like that:
 
 ![Image](attr.png)
 
@@ -74,6 +78,8 @@ To animate all immediate children of an element, use `data-stagger="children"`:
   <button>And this button</button>
 </section>
 ```
+
+it should look like that:
 
 ![Image](children.png)
 
