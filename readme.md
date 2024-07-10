@@ -1,12 +1,12 @@
 # Stagger.js:
 
-Lightweight Staggered Animations for Static Websites
+A Simple Solution for Webflow Animations
 
 ## Introduction
 
-In the quest for more efficient and performant web animations, more than Webflow interactions, often lead to bloated JavaScript files and slower load times. This realization led us to explore alternatives, with GSAP (GreenSock Animation Platform) emerging as a natural choice due to its lightweight nature, quick performance, and robust feature set.
-
-Stagger.js is born out of the need to standardize commonly used staggered animations across multiple websites. It provides a simple "stagger language" that allows developers to add numbered attributes to elements and let the script handle the rest. The goal is to add a dynamic feel to otherwise static websites with minimal effort.
+Hey there, Webflow designer. If you've been working with Webflow for a while, you might have noticed something: the more animations you add using Webflow's built-in interactions, the slower your site gets. It's because each interaction adds to the webflow.js file, and that can really bog things down.
+We ran into this problem ourselves and started looking for a better way. That's how we came up with Stagger.js. It's a tool that works with Webflow to give you those nice, staggered animations without slowing down your site.
+Here's the deal: Stagger.js lets you add scrolling animations to your Webflow site using just attributes. You don't need to know how to code. All you do is add some numbered attributes to your elements, like `gush-animate="1"`, `gush-animate="2"`, and so on. That's it. Stagger.js handles the rest. It's straightforward and keeps your site running smoothly.
 
 ## Features
 
@@ -18,15 +18,18 @@ Stagger.js is born out of the need to standardize commonly used staggered animat
 
 ## Installation
 
-1. Include GSAP and ScrollTrigger in your HTML:
+1. Include GSAP and ScrollTrigger in your `</body>` tag:
 
-`````html
+```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+```
 
-2. Add the GushAnimate script to your HTML: ````html
+2. Add the staggerd.js script to your `</body>` tag:
+
+```html
 <script src="https://cdn.jsdelivr.net/npm/staggerd-js@latest/stagger.js"></script>
-`````
+```
 
 ## Usage
 
