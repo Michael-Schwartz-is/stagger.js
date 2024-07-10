@@ -1,6 +1,6 @@
 {
-  "name": "stagger.js",
-  "version": "0.3.0",
+  "name": "staggerd-js",
+  "version": "0.3.1",
   "description": "a simple library for staggered GSAP animations",
   "main": "stagger.js",
   "files": [
@@ -13,13 +13,12 @@
     "scrolltrigger",
     "Webflow"
   ],
-  "dependencies": {
-    "gsap": "^3.6.1",
-    "scrolltrigger": "^3.6.1"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Michael Schwartz",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "user": "^0.0.0"
+  }
 }

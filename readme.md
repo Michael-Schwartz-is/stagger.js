@@ -4,9 +4,9 @@ Lightweight Staggered Animations for Static Websites
 
 ## Introduction
 
-In the quest for more efficient and performant web animations, we found that traditional methods, such as Webflow interactions, often lead to bloated JavaScript files and slower load times. This realization led us to explore alternatives, with GSAP (GreenSock Animation Platform) emerging as a natural choice due to its lightweight nature, quick performance, and robust feature set.
+In the quest for more efficient and performant web animations, more than Webflow interactions, often lead to bloated JavaScript files and slower load times. This realization led us to explore alternatives, with GSAP (GreenSock Animation Platform) emerging as a natural choice due to its lightweight nature, quick performance, and robust feature set.
 
-GushAnimate is born out of the need to standardize commonly used staggered animations across multiple websites. It provides a simple "stagger language" that allows developers to add numbered attributes to elements and let the script handle the rest. The goal is to add a dynamic feel to otherwise static websites with minimal effort.
+Stagger.js is born out of the need to standardize commonly used staggered animations across multiple websites. It provides a simple "stagger language" that allows developers to add numbered attributes to elements and let the script handle the rest. The goal is to add a dynamic feel to otherwise static websites with minimal effort.
 
 ## Features
 
@@ -25,7 +25,7 @@ GushAnimate is born out of the need to standardize commonly used staggered anima
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
 
 2. Add the GushAnimate script to your HTML: ````html
-<script src="path/to/data-stagger.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/staggerd-js@latest/stagger.js"></script>
 `````
 
 ## Usage
