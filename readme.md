@@ -6,7 +6,9 @@ A Simple Solution for Webflow Animations
 
 Hey there, Webflow friend 👋
 If you've been working with Webflow for a while, you might have noticed something: the more animations you add using Webflow's built-in interactions, the slower your site gets. It's because each interaction adds to the webflow.js file, and that can really bog things down.
+
 We ran into this problem ourselves and started looking for a better way. That's how we came up with Stagger.js. It's a tool that works with Webflow to give you those nice, staggered animations without slowing down your site.
+
 Here's the deal: Stagger.js lets you add scrolling animations to your Webflow site using just attributes. You don't need to know how to code. All you do is add some numbered attributes to your elements, like `gush-animate="1"`, `gush-animate="2"`, and so on. That's it. Stagger.js handles the rest. It's straightforward and keeps your site running smoothly.
 
 ## Features
