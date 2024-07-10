@@ -51,6 +51,7 @@ function createAnimation(elements, trigger = null) {
   });
 
   tl.from(elements, {
+    autoAlpha: 0,
     visibility: 0,
     opacity: 0,
     ease: "power2.inOut",
