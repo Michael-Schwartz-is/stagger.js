@@ -42,7 +42,7 @@ function createAnimation(elements, trigger = null) {
   });
 
   const tl = gsap.timeline(
-    { autoAlpha: 0, paused: true },
+    { autoAlpha: 0 },
     {
       scrollTrigger: {
         trigger: trigger || elements[0],
