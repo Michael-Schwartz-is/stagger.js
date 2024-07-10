@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staggered Animation Test</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+        }
+
+        nav ul li {
+            margin: 0 1rem;
+        }
+
+        nav ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #3498db;
+        }
+
+        /* Main content styles */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+            padding: 2rem;
+        }
+
+        .container {
+            background-color: #ecf0f1;
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        /* Typography */
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            color: #34495e;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Button styles */
+        button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Image styles */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        /* Form styles */
+        form div {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li data-stagger="2"><a href="#home">Home</a></li>
+                <li data-stagger="3"><a href="#about">About</a></li>
+                <li data-stagger="4"><a href="#services">Services</a></li>
+                <li data-stagger="5"><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="section">
+            <h2 data-stagger="1">Home</h2>
+            <div class="container">
+                <p data-stagger="2">Welcome to our homepage. Here you'll find all the information you need.</p>
+                <button data-stagger="3">Learn More</button>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2 data-stagger="1">About Us</h2>
+                <img src="https://via.placeholder.com/300x200" alt="About Us" data-stagger="2">
+                <p data-stagger="3">We are a company dedicated to providing excellent service.</p>
+            </div>
+            <div class="container">
+                <h3 data-stagger="1">Our Team</h3>
+                <ul>
+                    <li data-stagger="2">John Doe - CEO</li>
+                    <li data-stagger="3">Jane Smith - CTO</li>
+                    <li data-stagger="4">Mike Johnson - CFO</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="services" class="section">
+            <h2 data-stagger="1">Our Services</h2>
+            <div class="container">
+                <h3 data-stagger="1">Web Development</h3>
+                <p data-stagger="2">We create stunning websites tailored to your needs.</p>
+            </div>
+            <div class="container">
+                <h3 data-stagger="1">Mobile Apps</h3>
+                <p data-stagger="2">Innovative mobile applications for iOS and Android.</p>
+            </div>
+            <div class="container">
+                <h3 data-stagger="1">Cloud Solutions</h3>
+                <p data-stagger="2">Scalable and secure cloud infrastructure for your business.</p>
+            </div>
+        </section>
+
+        <!-- Additional sections for longer scrolling experience -->
+        <section id="portfolio" class="section">
+            <h2 data-stagger="1">Our Portfolio</h2>
+            <div class="container">
+                <img src="https://via.placeholder.com/300x200" alt="Project 1" data-stagger="2">
+                <h3 data-stagger="3">Project 1</h3>
+                <p data-stagger="4">Description of Project 1</p>
+            </div>
+            <div class="container">
+                <img src="https://via.placeholder.com/300x200" alt="Project 2" data-stagger="2">
+                <h3 data-stagger="3">Project 2</h3>
+                <p data-stagger="4">Description of Project 2</p>
+            </div>
+            <div class="container">
+                <img src="https://via.placeholder.com/300x200" alt="Project 3" data-stagger="2">
+                <h3 data-stagger="3">Project 3</h3>
+                <p data-stagger="4">Description of Project 3</p>
+            </div>
+        </section>
+
+        <section id="testimonials" class="section">
+            <h2 data-stagger="1">Testimonials</h2>
+            <div class="container">
+                <p data-stagger="2">"Great service! Highly recommended." - Client A</p>
+            </div>
+            <div class="container">
+                <p data-stagger="2">"Excellent work and professional team." - Client B</p>
+            </div>
+            <div class="container">
+                <p data-stagger="2">"They exceeded our expectations." - Client C</p>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <h2 data-stagger="1">Contact Us</h2>
+            <form>
+                <div data-stagger="2">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div data-stagger="3">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div data-stagger="4">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" data-stagger="5">Send</button>
+            </form>
+        </section>
+        <!-- Add a new section to demonstrate the "children" option -->
+        <section id="features" class="section" data-stagger="children">
+            <h2>Our Features</h2>
+            <div class="container">
+                <h3>Feature 1</h3>
+                <p>Description of Feature 1</p>
+            </div>
+            <div class="container">
+                <h3>Feature 2</h3>
+                <p>Description of Feature 2</p>
+            </div>
+            <div class="container">
+                <h3>Feature 3</h3>
+                <p>Description of Feature 3</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Our Company. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script src="stagger.js"></script>
+
+</body>
+
+</html>
