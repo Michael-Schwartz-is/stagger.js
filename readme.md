@@ -101,10 +101,4 @@ GushAnimate is released under the MIT License. See the LICENSE file for details.
 
 ## Credit
 
-GushAnimate was created by Michael at Studio Gushon. For more information, visit gushon.com.
-
-# stagger.js
-
-# stagger.js
-
-# stagger.js
+GushAnimate was created by Michael at Studio Gushon. For more information, visit [gushon.com]:https://gushon.com
