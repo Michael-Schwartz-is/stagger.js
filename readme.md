@@ -123,6 +123,12 @@ Full List of Interaction Options
 17. **Typewriter**
     - `typewriter.in`
 
+To use these, simply add the `data-stagger` attribute to an element. you can add it to a single element or to a parent to animate it's children. For example:
+
+- `data-stagger="1.bounce.in"`
+- `data-stagger="2.slide.left"`
+- `data-stagger="children.zoom.in"`
+
 ## Inspiration from Lumos
 
 Our approach draws inspiration from Timothy Ricks' Lumos styling system. Lumos pioneered the concept of concatenating multiple style parameters into a single class, allowing for powerful and flexible styling options. We've adapted this idea to work with animations, using a single attribute to control multiple aspects of an animation.
