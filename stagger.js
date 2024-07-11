@@ -42,7 +42,6 @@ function createAnimation(elements, trigger = null) {
   });
 
   const staggerdTl = gsap.timeline({
-    defaults: { autoAlpha: 0 },
     scrollTrigger: {
       trigger: trigger || elements[0],
       start: "top 80%",
@@ -51,7 +50,8 @@ function createAnimation(elements, trigger = null) {
     },
   });
 
-  staggerdTl.from(elements, {
+  staggerdTl.to(elements, {
+    autoAlpha: 1,
     ease: "power2.inOut",
     duration: 1,
     stagger: elements.length > 1 ? 0.2 : 0,
