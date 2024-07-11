@@ -41,7 +41,8 @@ function createAnimation(elements, trigger = null) {
     return aValue && bValue ? parseInt(aValue) - parseInt(bValue) : 0;
   });
 
-  const tl = gsap.timeline({
+  const staggerdTl = gsap.timeline({
+    defaults: { autoAlpha: 0 },
     scrollTrigger: {
       trigger: trigger || elements[0],
       start: "top 80%",
@@ -50,8 +51,7 @@ function createAnimation(elements, trigger = null) {
     },
   });
 
-  tl.from(elements, {
-    autoAlpha: 0,
+  staggerdTl.from(elements, {
     ease: "power2.inOut",
     duration: 1,
     stagger: elements.length > 1 ? 0.2 : 0,
@@ -62,10 +62,6 @@ function hasMultipleAnimatedChildren(element) {
   const animatedChildren = element.querySelectorAll("[data-stagger]");
   return animatedChildren.length > 1;
 }
-
-// document.addEventListener("load", function (event) {
-//   initStaggeredAnimations();
-// });
 
 document.addEventListener("DOMContentLoaded", function (event) {
   initStaggeredAnimations();
