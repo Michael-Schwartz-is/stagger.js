@@ -41,21 +41,17 @@ function createAnimation(elements, trigger = null) {
     return aValue && bValue ? parseInt(aValue) - parseInt(bValue) : 0;
   });
 
-  const tl = gsap.timeline(
-    { autoAlpha: 0 },
-    {
-      scrollTrigger: {
-        trigger: trigger || elements[0],
-        start: "top 80%",
-        end: "bottom 20%",
-        toggleActions: "play none none reverse",
-      },
-    }
-  );
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: trigger || elements[0],
+      start: "top 80%",
+      end: "bottom 20%",
+      toggleActions: "play none none reverse",
+    },
+  });
 
   tl.from(elements, {
-    visibility: 0,
-    opacity: 0,
+    autoAlpha: 0,
     ease: "power2.inOut",
     duration: 1,
     stagger: elements.length > 1 ? 0.2 : 0,
