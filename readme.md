@@ -16,7 +16,9 @@ The `data-stagger` attribute uses the following syntax:
 For example:
 
 `data-stagger="1.fade.in"` - Fades in the element, first in order
+
 `data-stagger="2.slide.left"` - Slides the element in from the left, second in order
+
 `data-stagger="children.zoom.in"` - Zooms in all child elements of the parent
 
 ## Implementation
