@@ -1,78 +1,35 @@
-// function initStaggeredAnimations() {
-//   const animatedElements = document.querySelectorAll("[data-stagger]");
-//   const groups = {};
-//   let singleElements = [];
-
-//   animatedElements.forEach((el) => {
-//     const animateValue = el.getAttribute("data-stagger");
-
-//     if (animateValue === "children") {
-//       // Handle "children" option
-//       const children = Array.from(el.children);
-//       createAnimation(children, el);
-//     } else {
-//       let ancestor = el.parentElement;
-//       while (ancestor && !hasMultipleAnimatedChildren(ancestor)) {
-//         ancestor = ancestor.parentElement;
-//       }
-
-//       if (ancestor) {
-//         if (!groups[ancestor.id]) {
-//           ancestor.id = ancestor.id || "stagger-group-" + Object.keys(groups).length;
-//           groups[ancestor.id] = [];
-//         }
-//         groups[ancestor.id].push(el);
-//       } else {
-//         singleElements.push(el);
-//       }
-//     }
-//   });
-
-//   Object.values(groups).forEach((group) => createAnimation(group));
-//   singleElements.forEach((el) => createAnimation([el]));
-// }
-
-// function createAnimation(elements, trigger = null) {
-//   if (elements.length === 0) return;
-
-//   elements.sort((a, b) => {
-//     const aValue = a.getAttribute("data-stagger");
-//     const bValue = b.getAttribute("data-stagger");
-//     return aValue && bValue ? parseInt(aValue) - parseInt(bValue) : 0;
-//   });
-
-//   const staggerdTl = gsap.timeline({
-//     defaults: { autoAlpha: 0 },
-//     scrollTrigger: {
-//       trigger: trigger || elements[0],
-//       start: "top 80%",
-//       end: "bottom 20%",
-//       toggleActions: "play none none reverse",
-//     },
-//   });
-
-//   staggerdTl.from(elements, {
-//     ease: "power2.inOut",
-//     duration: 1,
-//     stagger: elements.length > 1 ? 0.2 : 0,
-//   });
-// }
-
 function initStaggeredAnimations() {
   const animatedElements = document.querySelectorAll("[data-stagger]");
+  const groups = {};
+  let singleElements = [];
 
   animatedElements.forEach((el) => {
-    const staggerValue = el.getAttribute("data-stagger");
+    const animateValue = el.getAttribute("data-stagger");
 
-    if (staggerValue === "children") {
+    if (animateValue === "children") {
       // Handle "children" option
       const children = Array.from(el.children);
       createAnimation(children, el);
     } else {
-      // Handle numbered stagger
-      createAnimation([el]);
+      let ancestor = el.parentElement;
+      while (ancestor && !hasMultipleAnimatedChildren(ancestor)) {
+        ancestor = ancestor.parentElement;
+      }
+
+      if (ancestor) {
+        if (!groups[ancestor.id]) {
+          ancestor.id = ancestor.id || "stagger-group-" + Object.keys(groups).length;
+          groups[ancestor.id] = [];
+        }
+        groups[ancestor.id].push(el);
+      } else {
+        singleElements.push(el);
+      }
     }
   });
+
+  Object.values(groups).forEach((group) => createAnimation(group));
+  singleElements.forEach((el) => createAnimation([el]));
 }
 
 function createAnimation(elements, trigger = null) {
@@ -81,11 +38,11 @@ function createAnimation(elements, trigger = null) {
   elements.sort((a, b) => {
     const aValue = a.getAttribute("data-stagger");
     const bValue = b.getAttribute("data-stagger");
-    return aValue && bValue && !isNaN(aValue) && !isNaN(bValue)
-      ? parseInt(aValue) - parseInt(bValue)
-      : 0;
+    return aValue && bValue ? parseInt(aValue) - parseInt(bValue) : 0;
   });
-  const tl = gsap.timeline({
+
+  const staggerdTl = gsap.timeline({
+    defaults: { autoAlpha: 0 },
     scrollTrigger: {
       trigger: trigger || elements[0],
       start: "top 80%",
@@ -94,13 +51,11 @@ function createAnimation(elements, trigger = null) {
     },
   });
 
-  tl.set(elements, { autoAlpha: 0 }) // Set initial state
-    .to(elements, {
-      autoAlpha: 1,
-      ease: "power2.inOut",
-      duration: 1,
-      stagger: elements.length > 1 ? 0.2 : 0,
-    });
+  staggerdTl.from(elements, {
+    ease: "power2.inOut",
+    duration: 1,
+    stagger: elements.length > 1 ? 0.2 : 0,
+  });
 }
 
 function hasMultipleAnimatedChildren(element) {
