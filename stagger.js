@@ -1,68 +1,170 @@
+const animationPresets = {
+  fade: {
+    in: { autoAlpha: 0 },
+    left: { autoAlpha: 0, x: -50 },
+    right: { autoAlpha: 0, x: 50 },
+    top: { autoAlpha: 0, y: -50 },
+    bottom: { autoAlpha: 0, y: 50 },
+  },
+  slide: {
+    left: { x: -100, autoAlpha: 0 },
+    right: { x: 100, autoAlpha: 0 },
+    top: { y: -100, autoAlpha: 0 },
+    bottom: { y: 100, autoAlpha: 0 },
+  },
+  zoom: {
+    in: { scale: 0.5, autoAlpha: 0 },
+    out: { scale: 1.5, autoAlpha: 0 },
+  },
+  flip: {
+    x: { rotationX: 90, autoAlpha: 0 },
+    y: { rotationY: 90, autoAlpha: 0 },
+  },
+  rotate: {
+    left: { rotation: -90, autoAlpha: 0 },
+    right: { rotation: 90, autoAlpha: 0 },
+  },
+  bounce: {
+    in: { y: -50, autoAlpha: 0, ease: "bounce.out" },
+    left: { x: -50, autoAlpha: 0, ease: "bounce.out" },
+    right: { x: 50, autoAlpha: 0, ease: "bounce.out" },
+  },
+  elastic: {
+    in: { scale: 0.5, autoAlpha: 0, ease: "elastic.out(1, 0.3)" },
+    left: { x: -100, autoAlpha: 0, ease: "elastic.out(1, 0.3)" },
+    right: { x: 100, autoAlpha: 0, ease: "elastic.out(1, 0.3)" },
+  },
+  blur: {
+    in: { filter: "blur(20px)", autoAlpha: 0 },
+  },
+  shake: {
+    x: {
+      x: 20,
+      autoAlpha: 0,
+      ease: "rough({ strength: 8, points: 20, template: linear, taper: both })",
+    },
+    y: {
+      y: 20,
+      autoAlpha: 0,
+      ease: "rough({ strength: 8, points: 20, template: linear, taper: both })",
+    },
+  },
+  swing: {
+    in: { rotation: 45, transformOrigin: "top left", autoAlpha: 0 },
+  },
+  spiral: {
+    in: { rotation: 360, scale: 0, autoAlpha: 0 },
+  },
+  hinge: {
+    out: {
+      rotation: 80,
+      x: -300,
+      y: 300,
+      transformOrigin: "top left",
+      autoAlpha: 0,
+      ease: "power2.inOut",
+    },
+  },
+  pulsate: {
+    in: { scale: 0.5, autoAlpha: 0, ease: "elastic.out(1, 0.3)" },
+  },
+  dropIn: {
+    top: { y: -500, autoAlpha: 0, ease: "bounce.out" },
+  },
+  unfold: {
+    horizontal: { scaleX: 0, autoAlpha: 0 },
+    vertical: { scaleY: 0, autoAlpha: 0 },
+  },
+  rise: {
+    in: { y: 100, autoAlpha: 0, ease: "power4.out" },
+  },
+  typewriter: {
+    in: { width: 0, autoAlpha: 1 },
+  },
+};
+// Note: The animationPresets object should be defined before this script
+
 function initStaggeredAnimations() {
-  const animatedElements = document.querySelectorAll("[data-stagger]");
-  const groups = {};
-  let singleElements = [];
+  const elements = document.querySelectorAll("[data-stagger]");
+  console.log("Found elements with data-stagger:", elements.length);
 
-  animatedElements.forEach((el) => {
-    const animateValue = el.getAttribute("data-stagger");
+  ScrollTrigger.batch(elements, {
+    onEnter: (batch) => {
+      console.log("Batch entered:", batch.length);
+      animateElements(batch);
+    },
+    start: "top 80%",
+  });
+}
 
-    if (animateValue === "children") {
-      // Handle "children" option
+function parseStaggerAttribute(attr) {
+  const parts = attr.split(".");
+
+  if (parts[0] === "children") {
+    return [0, "children", ...parts.slice(1)];
+  } else {
+    return [parseInt(parts[0]) || 0, ...parts.slice(1)];
+  }
+}
+
+function getAnimationProps(animationParts) {
+  const [animationType, direction = "in"] = animationParts;
+
+  if (animationPresets[animationType] && animationPresets[animationType][direction]) {
+    return animationPresets[animationType][direction];
+  }
+
+  console.warn(
+    `Animation preset not found: ${animationType}.${direction}. Falling back to fade.in`
+  );
+  return animationPresets.fade.in;
+}
+
+function animateElements(elements) {
+  elements.forEach((el) => {
+    const parsedAttr = parseStaggerAttribute(el.getAttribute("data-stagger"));
+    const isChildren = parsedAttr[1] === "children";
+    const [order, ...animationParts] = parsedAttr;
+
+    console.log(`Animating element: ${el.tagName}, animation: ${animationParts.join(".")}`);
+
+    if (isChildren) {
+      console.log("Animating element with children:", el);
       const children = Array.from(el.children);
-      createAnimation(children, el);
-    } else {
-      let ancestor = el.parentElement;
-      while (ancestor && !hasMultipleAnimatedChildren(ancestor)) {
-        ancestor = ancestor.parentElement;
-      }
+      console.log("Number of children found:", children.length);
 
-      if (ancestor) {
-        if (!groups[ancestor.id]) {
-          ancestor.id = ancestor.id || "stagger-group-" + Object.keys(groups).length;
-          groups[ancestor.id] = [];
-        }
-        groups[ancestor.id].push(el);
-      } else {
-        singleElements.push(el);
-      }
+      gsap.set(el, { autoAlpha: 1 });
+
+      gsap.from(children, {
+        ...getAnimationProps(animationParts.slice(1)),
+        duration: 1,
+        stagger: 0.2,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 80%",
+        },
+        onStart: () => console.log("Starting children animation"),
+        onComplete: () => console.log("Completed children animation"),
+      });
+    } else {
+      console.log("Animating single element:", el);
+      gsap.from(el, {
+        ...getAnimationProps(animationParts),
+        duration: 1,
+        ease: "power2.inOut",
+        delay: order * 0.2,
+        scrollTrigger: {
+          trigger: el,
+          start: "top 80%",
+        },
+      });
     }
   });
-
-  Object.values(groups).forEach((group) => createAnimation(group));
-  singleElements.forEach((el) => createAnimation([el]));
 }
 
-function createAnimation(elements, trigger = null) {
-  if (elements.length === 0) return;
-
-  elements.sort((a, b) => {
-    const aValue = a.getAttribute("data-stagger");
-    const bValue = b.getAttribute("data-stagger");
-    return aValue && bValue ? parseInt(aValue) - parseInt(bValue) : 0;
-  });
-
-  const staggerdTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: trigger || elements[0],
-      start: "top 80%",
-      end: "bottom 20%",
-      toggleActions: "play none none reverse",
-    },
-  });
-
-  staggerdTl.to(elements, {
-    autoAlpha: 1,
-    ease: "power2.inOut",
-    duration: 1,
-    stagger: elements.length > 1 ? 0.2 : 0,
-  });
-}
-
-function hasMultipleAnimatedChildren(element) {
-  const animatedChildren = element.querySelectorAll("[data-stagger]");
-  return animatedChildren.length > 1;
-}
-
-document.addEventListener("DOMContentLoaded", function (event) {
-  initStaggeredAnimations();
+// Run initStaggeredAnimations after a short delay to ensure all elements are in the DOM
+window.addEventListener("load", () => {
+  console.log("Window loaded, initializing animations");
+  setTimeout(initStaggeredAnimations, 100);
 });

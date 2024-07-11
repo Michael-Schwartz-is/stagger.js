@@ -1,108 +1,134 @@
-# Stagger.js:
+# Stagger Interactions for Webflow
 
-A Simple Solution for Webflow Animations
+## Why We Need This
 
-## Introduction
+Webflow's built-in interactions, while powerful, can lead to bloated webflow.js files. This bloat often results in slower load times and decreased overall site performance, potentially impacting user experience and search engine rankings. Our system provides a lightweight alternative that maintains rich animation capabilities while significantly improving load times and performance.
 
-Hey there, Webflow friend 👋
+## One Magic Attribute (To Rule Them All)
 
-If you've been working with Webflow for a while, you might have noticed something: the more animations you add using Webflow's built-in interactions, the slower your site gets. It's because each interaction adds to the webflow.js file, and that can really bog things down.
+We've condensed all animation controls into a single, powerful attribute: data-stagger. This attribute allows you to specify the animation order, type, and direction in one concise instruction.
 
-We ran into this problem ourselves and started looking for a better way. That's how we came up with Stagger.js. It's a tool that works with Webflow to give you those nice, staggered animations without slowing down your site.
+## How It Works
 
-Here's the deal: Stagger.js lets you add scrolling animations to your Webflow site using just attributes. You don't need to know how to code. All you do is add some numbered attributes to your elements, like `gush-animate="1"`, `gush-animate="2"`, and so on. That's it. Stagger.js handles the rest. It's straightforward and keeps your site running smoothly.
+The `data-stagger` attribute uses the following syntax:
+`data-stagger="[order].[animation-type].[direction]"`
 
-## Features
+For example:
 
-- Lightweight: Utilizes GSAP for efficient animations without bloating your main JavaScript file.
-- Easy to Use: Simple attribute-based system for marking elements to animate.
-- Flexible: Supports individual elements, groups, and parent-child relationships.
-- Scroll-Triggered: Animations activate as elements come into view.
-- Customizable: Easy to adjust timing, easing, and other animation parameters.
+`data-stagger="1.fade.in"` - Fades in the element, first in order
+`data-stagger="2.slide.left"` - Slides the element in from the left, second in order
+`data-stagger="children.zoom.in"` - Zooms in all child elements of the parent
 
-## Installation
+## Implementation
 
-1. Include GSAP and ScrollTrigger in your `</body>` tag:
+Add GSAP to your project by including these scripts before the closing </body> tag:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
 ```
 
-2. Add the staggerd.js script to your `</body>` tag:
+Include our custom animation script:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/staggerd-js@latest/stagger.js"></script>
+<script src="path/to/stagger-interactions.js"></script>
 ```
 
-it should look like that:
+Start using the `data-stagger` attribute in your HTML elements.
 
-![Image](img/paste.png)
+Full List of Interaction Options
 
-## Usage
+1. **Fade**
 
-### Basic Usage
+   - `fade.in`
+   - `fade.left`
+   - `fade.right`
+   - `fade.top`
+   - `fade.bottom`
 
-Add the `data-stagger` attribute to any element you want to animate:
+2. **Slide**
 
-```html
-<div data-stagger="1">I'll animate first</div>
-<div data-stagger="2">I'll animate second</div>
-<div data-stagger="3">I'll animate third</div>
-```
+   - `slide.left`
+   - `slide.right`
+   - `slide.top`
+   - `slide.bottom`
 
-it should look like that:
+3. **Zoom**
 
-![Image](img/attr.png)
+   - `zoom.in`
+   - `zoom.out`
 
-## Grouping Elements
+4. **Flip**
 
-Elements with the same parent will be grouped and animated together:
+   - `flip.x`
+   - `flip.y`
 
-```html
-<section>
-  <h2 data-stagger="1">This heading</h2>
-  <p data-stagger="2">And this paragraph</p>
-  <button data-stagger="3">And this button</button>
-</section>
-```
+5. **Rotate**
 
-## Animating Children
+   - `rotate.left`
+   - `rotate.right`
 
-To animate all immediate children of an element, use `data-stagger="children"`:
+6. **Bounce**
 
-```html
-<section data-stagger="children">
-  <h2>This heading</h2>
-  <p>And this paragraph</p>
-  <button>And this button</button>
-</section>
-```
+   - `bounce.in`
+   - `bounce.left`
+   - `bounce.right`
 
-it should look like that:
+7. **Elastic**
 
-![Image](img/children.png)
+   - `elastic.in`
+   - `elastic.left`
+   - `elastic.right`
 
-## How It Works
+8. **Blur**
 
-- Scans the DOM for elements with the data-stagger attribute
-- Groups elements based on common ancestors or handles them individually
-- For `data-stagger="children"`, selects all immediate children
-- Triggers animation when a group or individual element scrolls into view
-- Elements animate with a fade-in and slight upward movement, staggered based on their order
+   - `blur.in`
 
-## Browser Support
+9. **Shake**
 
-Works in all modern browsers supporting GSAP and ScrollTrigger. See GSAP browser support documentation for details.
+   - `shake.x`
+   - `shake.y`
 
-## Contributing
+10. **Swing**
 
-We welcome contributions! Feel free to submit issues, feature requests, or pull requests.
+    - `swing.in`
 
-## License
+11. **Spiral**
 
-GushAnimate is released under the MIT License. See the LICENSE file for details.
+    - `spiral.in`
 
-## About
+12. **Hinge**
 
-stagger.js was created by Michael at Studio Gushon. after testing it for a yerar on client projects. For more information, visit https://gushon.com
+    - `hinge.out`
+
+13. **Pulsate**
+
+    - `pulsate.in`
+
+14. **Drop In**
+
+    - `dropIn.top`
+
+15. **Unfold**
+
+    - `unfold.horizontal`
+    - `unfold.vertical`
+
+16. **Rise**
+
+    - `rise.in`
+
+17. **Typewriter**
+    - `typewriter.in`
+
+## Inspiration from Lumos
+
+Our approach draws inspiration from Timothy Ricks' Lumos styling system. Lumos pioneered the concept of concatenating multiple style parameters into a single class, allowing for powerful and flexible styling options. We've adapted this idea to work with animations, using a single attribute to control multiple aspects of an animation.
+
+## Who Made This
+
+This system was developed by Michael Schwartz at Studio Gushon, a webflow agency passionate about creating high-performance, visually appealing websites. We combined our expertise in Webflow, GSAP, and performance optimization to create this lightweight animation system.
+
+## Want to Contribute?
+
+We welcome contributions to improve and expand this system! If you have ideas for new animations, performance optimizations, or bug fixes, please visit our GitHub repository at [repository link]. You can submit issues, feature requests, or pull requests. Let's work together to make web animations faster and more accessible for everyone!
