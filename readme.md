@@ -91,21 +91,6 @@ it should look like that:
 - Triggers animation when a group or individual element scrolls into view
 - Elements animate with a fade-in and slight upward movement, staggered based on their order
 
-## Customization
-
-Modify the createAnimation function in the script to customize animation parameters:
-
-```javascript
-tl.from(elements, {
-  opacity: 0,
-  y: 50,
-  duration: 0.5,
-  stagger: elements.length > 1 ? 0.2 : 0,
-});
-```
-
-Adjust `opacity`, `y`, `duration`, and `stagger` values to change animation style and timing. in this version it's global.
-
 ## Browser Support
 
 Works in all modern browsers supporting GSAP and ScrollTrigger. See GSAP browser support documentation for details.

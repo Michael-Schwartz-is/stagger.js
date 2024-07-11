@@ -63,4 +63,10 @@ function hasMultipleAnimatedChildren(element) {
   return animatedChildren.length > 1;
 }
 
-document.addEventListener("DOMContentLoaded", initStaggeredAnimations);
+// document.addEventListener("load", function (event) {
+//   initStaggeredAnimations();
+// });
+
+document.addEventListener("DOMContentLoaded", function (event) {
+  initStaggeredAnimations();
+});
