@@ -162,15 +162,14 @@
             <ol data-stagger="children.fade.right">
                 <li>
                     <p>Add GSAP to your project by including these scripts before the closing &lt;/body&gt; tag:</p>
-                    <pre data-stagger="2.zoom.in">
+                    <pre>
 &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"&gt;&lt;/script&gt;
 &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"&gt;&lt;/script&gt;
                     </pre>
                 </li>
                 <li>
                     <p>Include our custom animation script:</p>
-                    <pre
-                        data-stagger="3.zoom.in">&lt;script src="path/to/stagger-interactions.js"&gt;&lt;/script&gt;</pre>
+                    <pre>&lt;script src="path/to/stagger-interactions.js"&gt;&lt;/script&gt;</pre>
                 </li>
                 <li>
                     <p>Start using the data-stagger attribute in your HTML elements.</p>
@@ -217,15 +216,15 @@
         </section>
     </main>
 
-    <section class="cta" data-stagger="1.bounce.in">
-        <div class="container">
+    <section class="cta">
+        <div class="container" data-stagger="children.bounce.left">
             <h2>Want to Contribute?</h2>
             <p>We welcome contributions to improve and expand this system!</p>
             <button>Visit Our GitHub</button>
         </div>
     </section>
 
-    <footer data-stagger="1.fade.bottom">
+    <footer>
         <div class="container">
             <p>&copy; 2023 Stagger Interactions for Webflow. All rights reserved.</p>
         </div>

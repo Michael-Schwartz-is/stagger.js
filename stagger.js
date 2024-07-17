@@ -25,7 +25,7 @@ const animationPresets = {
     right: { rotation: 90, autoAlpha: 0 },
   },
   bounce: {
-    in: { y: -50, autoAlpha: 0, ease: "bounce.out" },
+    in: { y: 50, autoAlpha: 0, ease: "bounce.out" },
     left: { x: -50, autoAlpha: 0, ease: "bounce.out" },
     right: { x: 50, autoAlpha: 0, ease: "bounce.out" },
   },
@@ -146,7 +146,7 @@ function animateElements(elements) {
 
       gsap.from(children, {
         ...getAnimationProps(animationParts.slice(1)),
-        duration: 1,
+        duration: 0.6,
         stagger: 0.2,
         ease: "power2.inOut",
         scrollTrigger: {

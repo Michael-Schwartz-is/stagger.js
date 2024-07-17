@@ -8,9 +8,22 @@ Webflow's built-in interactions, while powerful, can lead to bloated webflow.js 
 
 We've condensed all animation controls into a single, powerful attribute: data-stagger. This attribute allows you to specify the animation order, type, and direction in one concise instruction.
 
-## How It Works
+## How It Works - Easy Method (option 1)
 
-The `data-stagger` attribute uses the following syntax:
+add the data-stagger attribute to an element to stagger it's children. there's a bunch of animations you can choose from (webflow's presets and more), a full list is lower in this doc👇🏻. you dont need to specify anything on any of the children.
+
+**here's a basic usecase:**
+
+`data-stagger="children.zoom.in"` - Zooms in all child elements of the parent
+
+## How It Works - More control
+
+The `data-stagger` attribute alows you to set the order of the staggered elements.
+
+**basic usecase**
+if you want a `heading`, `subheading`, `button` and an `image` to animate when scrolling into view, you can number these elements and the stagger will take trigger their apperance by how you ordered them. this method does not require to set a children attribute on the parent.
+
+uses the following syntax:
 `data-stagger="[order].[animation-type].[direction]"`
 
 For example:
@@ -19,7 +32,7 @@ For example:
 
 `data-stagger="2.slide.left"` - Slides the element in from the left, second in order
 
-`data-stagger="children.zoom.in"` - Zooms in all child elements of the parent
+**important:** method 1 and 2 are mutually exclusive, use one or the other, but not both, you either want the script to automatically stagger its children (use children) or you want contorl (use numbers).
 
 ## Implementation
 
