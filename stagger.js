@@ -102,6 +102,7 @@ function initStaggeredAnimations() {
       animateElements(batch);
     },
     start: "top 80%",
+    once: true,
   });
 }
 
