@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stagger Interactions for Webflow</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            background-color: #f0f0f0;
+            line-height: 1.6;
+        }
+
+        [data-stagger] {
+            visibility: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .hero {
+            background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 100px 0;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .content-section {
+            background-color: white;
+            margin: 40px 0;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 50px 0;
+        }
+
+        .feature {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 10px;
+            width: calc(33.333% - 20px);
+            text-align: center;
+        }
+
+        .interaction-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .interaction-item {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .cta {
+            background-color: #e74c3c;
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .cta button {
+            background-color: white;
+            color: #e74c3c;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cta button:hover {
+            background-color: #c0392b;
+            color: white;
+        }
+
+        footer {
+            background-color: #34495e;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <header data-stagger="1.slide.top">
+        <div class="container">
+            <h1>Stagger Interactions for Webflow</h1>
+        </div>
+    </header>
+
+    <section class="hero" data-stagger="children.fade.in">
+        <div class="container">
+            <h1>One Magic Attribute To Rule Them All</h1>
+            <p>Discover the power of data-stagger for lightweight, efficient animations</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <section class="content-section" data-stagger="1.fade.in">
+            <h2>Why We Need This</h2>
+            <p>Webflow's built-in interactions, while powerful, can lead to bloated webflow.js files. This bloat often
+                results in slower load times and decreased overall site performance, potentially impacting user
+                experience and search engine rankings. Our system provides a lightweight alternative that maintains rich
+                animation capabilities while significantly improving load times and performance.</p>
+        </section>
+
+        <section class="content-section" data-stagger="1.slide.right">
+            <h2>How It Works</h2>
+            <p>The data-stagger attribute uses the following syntax:</p>
+            <pre data-stagger="2.zoom.in">data-stagger="[order].[animation-type].[direction]"</pre>
+            <p>For example:</p>
+            <ul data-stagger="children.fade.left">
+                <li>data-stagger="1.fade.in" - Fades in the element, first in order</li>
+                <li>data-stagger="2.slide.left" - Slides the element in from the left, second in order</li>
+                <li>data-stagger="children.zoom.in" - Zooms in all child elements of the parent</li>
+            </ul>
+        </section>
+
+        <section class="content-section" data-stagger="1.slide.left">
+            <h2>Implementation</h2>
+            <ol data-stagger="children.fade.right">
+                <li>
+                    <p>Add GSAP to your project by including these scripts before the closing &lt;/body&gt; tag:</p>
+                    <pre data-stagger="2.zoom.in">
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"&gt;&lt;/script&gt;
+                    </pre>
+                </li>
+                <li>
+                    <p>Include our custom animation script:</p>
+                    <pre
+                        data-stagger="3.zoom.in">&lt;script src="path/to/stagger-interactions.js"&gt;&lt;/script&gt;</pre>
+                </li>
+                <li>
+                    <p>Start using the data-stagger attribute in your HTML elements.</p>
+                </li>
+            </ol>
+        </section>
+
+        <section class="content-section" data-stagger="1.fade.bottom">
+            <h2>Full List of Interaction Options</h2>
+            <div class="interaction-list" data-stagger="children.zoom.in">
+                <div class="interaction-item">Fade</div>
+                <div class="interaction-item">Slide</div>
+                <div class="interaction-item">Zoom</div>
+                <div class="interaction-item">Flip</div>
+                <div class="interaction-item">Rotate</div>
+                <div class="interaction-item">Bounce</div>
+                <div class="interaction-item">Elastic</div>
+                <div class="interaction-item">Blur</div>
+                <div class="interaction-item">Shake</div>
+                <div class="interaction-item">Swing</div>
+                <div class="interaction-item">Spiral</div>
+                <div class="interaction-item">Hinge</div>
+                <div class="interaction-item">Pulsate</div>
+                <div class="interaction-item">Drop In</div>
+                <div class="interaction-item">Unfold</div>
+                <div class="interaction-item">Rise</div>
+                <div class="interaction-item">Typewriter</div>
+            </div>
+        </section>
+
+        <section class="content-section" data-stagger="1.slide.right">
+            <h2>Inspiration from Lumos</h2>
+            <p>Our approach draws inspiration from Timothy Ricks' Lumos styling system. Lumos pioneered the concept of
+                concatenating multiple style parameters into a single class, allowing for powerful and flexible styling
+                options. We've adapted this idea to work with animations, using a single attribute to control multiple
+                aspects of an animation.</p>
+        </section>
+
+        <section class="content-section" data-stagger="1.fade.in">
+            <h2>Who Made This</h2>
+            <p>This system was developed by [Your Name/Team Name], a group of web developers passionate about creating
+                high-performance, visually appealing websites. We combined our expertise in Webflow, GSAP, and
+                performance optimization to create this lightweight animation system.</p>
+        </section>
+    </main>
+
+    <section class="cta" data-stagger="1.bounce.in">
+        <div class="container">
+            <h2>Want to Contribute?</h2>
+            <p>We welcome contributions to improve and expand this system!</p>
+            <button>Visit Our GitHub</button>
+        </div>
+    </section>
+
+    <footer data-stagger="1.fade.bottom">
+        <div class="container">
+            <p>&copy; 2023 Stagger Interactions for Webflow. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script src="/stagger.js"></script>
+</body>
+
+</html>

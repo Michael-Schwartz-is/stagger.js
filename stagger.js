@@ -82,15 +82,23 @@ const animationPresets = {
     in: { width: 0, autoAlpha: 1 },
   },
 };
-// Note: The animationPresets object should be defined before this script
+
+let debugMode = localStorage.getItem("debugMode") === "true" || false;
+document.addEventListener("keydown", (e) => {
+  if (e.key === "d") {
+    debugMode = !debugMode;
+    localStorage.setItem("debugMode", debugMode);
+    location.reload();
+  }
+});
 
 function initStaggeredAnimations() {
   const elements = document.querySelectorAll("[data-stagger]");
-  console.log("Found elements with data-stagger:", elements.length);
+  debugMode && console.log("Found elements with data-stagger:", elements.length);
 
   ScrollTrigger.batch(elements, {
     onEnter: (batch) => {
-      console.log("Batch entered:", batch.length);
+      debugMode && console.log("Batch entered:", batch.length);
       animateElements(batch);
     },
     start: "top 80%",
@@ -126,12 +134,13 @@ function animateElements(elements) {
     const isChildren = parsedAttr[1] === "children";
     const [order, ...animationParts] = parsedAttr;
 
-    console.log(`Animating element: ${el.tagName}, animation: ${animationParts.join(".")}`);
+    debugMode &&
+      console.log(`Animating element: ${el.tagName}, animation: ${animationParts.join(".")}`);
 
     if (isChildren) {
-      console.log("Animating element with children:", el);
+      debugMode && console.log("Animating element with children:", el);
       const children = Array.from(el.children);
-      console.log("Number of children found:", children.length);
+      debugMode && console.log("Number of children found:", children.length);
 
       gsap.set(el, { autoAlpha: 1 });
 
@@ -144,11 +153,11 @@ function animateElements(elements) {
           trigger: el,
           start: "top 80%",
         },
-        onStart: () => console.log("Starting children animation"),
-        onComplete: () => console.log("Completed children animation"),
+        onStart: () => debugMode && console.log("Starting children animation"),
+        onComplete: () => debugMode && console.log("Completed children animation"),
       });
     } else {
-      console.log("Animating single element:", el);
+      debugMode && console.log("Animating single element:", el);
       gsap.from(el, {
         ...getAnimationProps(animationParts),
         duration: 1,
@@ -165,6 +174,6 @@ function animateElements(elements) {
 
 // Run initStaggeredAnimations after a short delay to ensure all elements are in the DOM
 window.addEventListener("load", () => {
-  console.log("Window loaded, initializing animations");
+  debugMode && console.log("Window loaded, initializing animations");
   setTimeout(initStaggeredAnimations, 100);
 });

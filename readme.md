@@ -23,22 +23,22 @@ For example:
 
 ## Implementation
 
-Add GSAP to your project by including these scripts before the closing </body> tag:
+Add GSAP and ScrollTrigger to your project by including these scripts before the closing `</body>` tag:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
 ```
 
-Include our custom animation script:
+Also include our custom animation script:
 
 ```html
-<script src="path/to/stagger-interactions.js"></script>
+<script src="https://unpkg.com/webflow-stagger@latest/stagger.js"></script>
 ```
 
 Start using the `data-stagger` attribute in your HTML elements.
 
-Full List of Interaction Options
+## Full List of Interaction Options
 
 1. **Fade**
 

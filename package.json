@@ -1,7 +1,7 @@
 {
-  "name": "staggerd-js",
-  "version": "0.3.1",
-  "description": "a simple library for staggered GSAP animations",
+  "name": "webflow-stagger",
+  "version": "0.5.0",
+  "description": "a GSAP version of webflow animations",
   "main": "stagger.js",
   "files": [
     "stagger.js"
