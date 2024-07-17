@@ -151,7 +151,7 @@ function animateElements(elements) {
         stagger: 0.2,
         ease: "power2.inOut",
         scrollTrigger: {
-          trigger: el,
+          trigger: children[0],
           start: "top 80%",
         },
         onStart: () => debugMode && console.log("Starting children animation"),
