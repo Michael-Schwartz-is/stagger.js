@@ -1,20 +1,20 @@
 const animationPresets = {
   fade: {
     in: { autoAlpha: 0 },
-    left: { autoAlpha: 0, x: -50 },
-    right: { autoAlpha: 0, x: 50 },
-    top: { autoAlpha: 0, y: -50 },
-    bottom: { autoAlpha: 0, y: 50 },
+    left: { autoAlpha: 0, x: -30 },
+    right: { autoAlpha: 0, x: 30 },
+    top: { autoAlpha: 0, y: -30 },
+    bottom: { autoAlpha: 0, y: 30 },
   },
   slide: {
-    left: { x: -100, autoAlpha: 0 },
-    right: { x: 100, autoAlpha: 0 },
-    top: { y: -100, autoAlpha: 0 },
-    bottom: { y: 100, autoAlpha: 0 },
+    left: { x: -30, autoAlpha: 0 },
+    right: { x: 30, autoAlpha: 0 },
+    top: { y: -30, autoAlpha: 0 },
+    bottom: { y: 30, autoAlpha: 0 },
   },
   zoom: {
-    in: { scale: 0.5, autoAlpha: 0 },
-    out: { scale: 1.5, autoAlpha: 0 },
+    in: { scale: 0.9, autoAlpha: 0 },
+    out: { scale: 1.1, autoAlpha: 0 },
   },
   flip: {
     x: { rotationX: 90, autoAlpha: 0 },
@@ -25,9 +25,9 @@ const animationPresets = {
     right: { rotation: 90, autoAlpha: 0 },
   },
   bounce: {
-    in: { y: 50, autoAlpha: 0, ease: "bounce.out" },
-    left: { x: -50, autoAlpha: 0, ease: "bounce.out" },
-    right: { x: 50, autoAlpha: 0, ease: "bounce.out" },
+    in: { y: 25, autoAlpha: 0, ease: "bounce.out" },
+    left: { x: -25, autoAlpha: 0, ease: "bounce.out" },
+    right: { x: 25, autoAlpha: 0, ease: "bounce.out" },
   },
   elastic: {
     in: { scale: 0.5, autoAlpha: 0, ease: "elastic.out(1, 0.3)" },
@@ -35,25 +35,36 @@ const animationPresets = {
     right: { x: 100, autoAlpha: 0, ease: "elastic.out(1, 0.3)" },
   },
   blur: {
-    in: { filter: "blur(20px)", autoAlpha: 0 },
+    in: { filter: "blur(10px)", autoAlpha: 0 },
   },
   shake: {
     x: {
-      x: 20,
+      x: 40,
       autoAlpha: 0,
       ease: "rough({ strength: 8, points: 20, template: linear, taper: both })",
     },
     y: {
-      y: 20,
+      y: 200,
       autoAlpha: 0,
       ease: "rough({ strength: 8, points: 20, template: linear, taper: both })",
     },
   },
   swing: {
-    in: { rotation: 45, transformOrigin: "top left", autoAlpha: 0 },
+    in: { rotation: 12, transformOrigin: "bottom left", autoAlpha: 0 },
   },
   spiral: {
-    in: { rotation: 360, scale: 0, autoAlpha: 0 },
+    left: {
+      rotation: 180,
+      scale: 0,
+      transformOrigin: "bottom left",
+      autoAlpha: 0,
+    },
+    right: {
+      rotation: -180,
+      scale: 0,
+      transformOrigin: "bottom right",
+      autoAlpha: 0,
+    },
   },
   hinge: {
     out: {
@@ -109,20 +120,15 @@ function initStaggeredAnimations() {
 function parseStaggerAttribute(attr) {
   const parts = attr.split(".");
 
-  if (parts[0] === "children") {
-    return [0, "children", ...parts.slice(1)];
-  } else {
-    return [parseInt(parts[0]) || 0, ...parts.slice(1)];
-  }
+  return parts;
 }
 
 function getAnimationProps(animationParts) {
-  const [animationType, direction = "in"] = animationParts;
+  const [animationType, direction] = animationParts;
 
   if (animationPresets[animationType] && animationPresets[animationType][direction]) {
     return animationPresets[animationType][direction];
   }
-
   console.warn(
     `Animation preset not found: ${animationType}.${direction}. Falling back to fade.in`
   );
@@ -132,48 +138,32 @@ function getAnimationProps(animationParts) {
 function animateElements(elements) {
   elements.forEach((el) => {
     const parsedAttr = parseStaggerAttribute(el.getAttribute("data-stagger"));
-    const isChildren = parsedAttr[1] === "children";
-    const [order, ...animationParts] = parsedAttr;
+    const [...animationParts] = parsedAttr;
 
     debugMode &&
       console.log(`Animating element: ${el.tagName}, animation: ${animationParts.join(".")}`);
 
-    if (isChildren) {
-      debugMode && console.log("Animating element with children:", el);
-      const children = Array.from(el.children);
-      debugMode && console.log("Number of children found:", children.length);
+    debugMode && console.log("Animating children:", el);
+    const children = Array.from(el.children);
+    debugMode && console.log("Number of children found:", children.length);
 
-      gsap.set(el, { autoAlpha: 1 });
+    gsap.set(el, { autoAlpha: 1 });
 
-      gsap.from(children, {
-        ...getAnimationProps(animationParts.slice(1)),
-        duration: 0.6,
-        stagger: 0.2,
-        ease: "power2.inOut",
-        scrollTrigger: {
-          trigger: children[0],
-          start: "top 80%",
-        },
-        onStart: () => debugMode && console.log("Starting children animation"),
-        onComplete: () => debugMode && console.log("Completed children animation"),
-      });
-    } else {
-      debugMode && console.log("Animating single element:", el);
-      gsap.from(el, {
-        ...getAnimationProps(animationParts),
-        duration: 1,
-        ease: "power2.inOut",
-        delay: order * 0.2,
-        scrollTrigger: {
-          trigger: el,
-          start: "top 80%",
-        },
-      });
-    }
+    gsap.from(children, {
+      ...getAnimationProps(animationParts.slice(0)),
+      duration: 0.6,
+      stagger: 0.2,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: children[0],
+        start: "top 80%",
+      },
+      onStart: () => debugMode && console.log("Starting children animation"),
+      onComplete: () => debugMode && console.log("Completed children animation"),
+    });
   });
 }
 
-// Run initStaggeredAnimations after a short delay to ensure all elements are in the DOM
 window.addEventListener("load", () => {
   debugMode && console.log("Window loaded, initializing animations");
   setTimeout(initStaggeredAnimations, 100);

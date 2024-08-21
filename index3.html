@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSAP Animation Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .section {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 4px;
+            padding: 20px;
+            margin: 10px;
+            width: 150px;
+            text-align: center;
+        }
+
+        .list-item {
+            background-color: #2ecc71;
+            color: #fff;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .image-placeholder {
+            background-color: #e74c3c;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
+        [data-stagger] {
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>GSAP Animation Demo</h1>
+
+    <div class="section">
+        <h2>Fade In Cards</h2>
+        <div class="card-container" data-stagger="fade.in">
+            <div class="card">Card 1</div>
+            <div class="card">Card 2</div>
+            <div class="card">Card 3</div>
+            <div class="card">Card 4</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Slide In List</h2>
+        <div data-stagger="slide.left">
+            <div class="list-item">Item 1</div>
+            <div class="list-item">Item 2</div>
+            <div class="list-item">Item 3</div>
+            <div class="list-item">Item 4</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Zoom In Images</h2>
+        <div data-stagger="zoom.in">
+            <div class="image-placeholder">Image 1</div>
+            <div class="image-placeholder">Image 2</div>
+            <div class="image-placeholder">Image 3</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Bounce In Text</h2>
+        <div data-stagger="spiral.left">
+            <p>This is the first line of bouncing text.</p>
+            <p>Here's another line that will bounce in.</p>
+            <p>And one more for good measure!</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Rotate In Elements</h2>
+        <div data-stagger="spiral.right">
+            <div class="card">Rotate 1</div>
+            <div class="card">Rotate 2</div>
+            <div class="card">Rotate 3</div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script src="/stagger.js"></script>
+
+</body>
+
+</html>

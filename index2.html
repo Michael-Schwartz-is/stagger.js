@@ -16,9 +16,6 @@
             line-height: 1.6;
         }
 
-        [data-stagger] {
-            visibility: hidden;
-        }
 
         .container {
             max-width: 1200px;
@@ -119,17 +116,21 @@
             border-radius: 8px;
             overflow-x: auto;
         }
+
+        [data-stagger] {
+            visibility: hidden;
+        }
     </style>
 </head>
 
 <body>
-    <header data-stagger="1.slide.top">
+    <header data-stagger="slide.top">
         <div class="container">
             <h1>Stagger Interactions for Webflow</h1>
         </div>
     </header>
 
-    <section class="hero" data-stagger="children.fade.in">
+    <section class="hero" data-stagger="fade.in">
         <div class="container">
             <h1>One Magic Attribute To Rule Them All</h1>
             <p>Discover the power of data-stagger for lightweight, efficient animations</p>
@@ -137,7 +138,7 @@
     </section>
 
     <main class="container">
-        <section class="content-section" data-stagger="1.fade.in">
+        <section class="content-section" data-stagger="fade.in">
             <h2>Why We Need This</h2>
             <p>Webflow's built-in interactions, while powerful, can lead to bloated webflow.js files. This bloat often
                 results in slower load times and decreased overall site performance, potentially impacting user
@@ -145,21 +146,21 @@
                 animation capabilities while significantly improving load times and performance.</p>
         </section>
 
-        <section class="content-section" data-stagger="1.blur.in">
+        <section class="content-section" data-stagger="blur.in">
             <h2>How It Works</h2>
             <p>The data-stagger attribute uses the following syntax:</p>
-            <pre data-stagger="2.blur.in">data-stagger="[order].[animation-type].[direction]"</pre>
+            <pre data-stagger="blur.in">data-stagger="[order].[animation-type].[direction]"</pre>
             <p>For example:</p>
-            <ul data-stagger="children.fade.left">
-                <li>data-stagger="1.fade.in" - Fades in the element, first in order</li>
-                <li>data-stagger="2.slide.left" - Slides the element in from the left, second in order</li>
-                <li>data-stagger="children.zoom.in" - Zooms in all child elements of the parent</li>
+            <ul data-stagger="fade.left">
+                <li>data-stagger="fade.in" - Fades in the element, first in order</li>
+                <li>data-stagger="slide.left" - Slides the element in from the left, second in order</li>
+                <li>data-stagger="zoom.in" - Zooms in all child elements of the parent</li>
             </ul>
         </section>
 
-        <section class="content-section" data-stagger="1.slide.left">
+        <section class="content-section" data-stagger="slide.left">
             <h2>Implementation</h2>
-            <ol data-stagger="children.fade.right">
+            <ol data-stagger="fade.right">
                 <li>
                     <p>Add GSAP to your project by including these scripts before the closing &lt;/body&gt; tag:</p>
                     <pre>
@@ -177,9 +178,9 @@
             </ol>
         </section>
 
-        <section class="content-section" data-stagger="1.fade.bottom">
+        <section class="content-section" data-stagger="fade.bottom">
             <h2>Full List of Interaction Options</h2>
-            <div class="interaction-list" data-stagger="children.blur.in">
+            <div class="interaction-list" data-stagger="blur.in">
                 <div class="interaction-item">Fade</div>
                 <div class="interaction-item">Slide</div>
                 <div class="interaction-item">Zoom</div>
@@ -200,7 +201,7 @@
             </div>
         </section>
 
-        <section class="content-section" data-stagger="1.slide.right">
+        <section class="content-section" data-stagger="slide.right">
             <h2>Inspiration from Lumos</h2>
             <p>Our approach draws inspiration from Timothy Ricks' Lumos styling system. Lumos pioneered the concept of
                 concatenating multiple style parameters into a single class, allowing for powerful and flexible styling
@@ -208,7 +209,7 @@
                 aspects of an animation.</p>
         </section>
 
-        <section class="content-section" data-stagger="1.fade.in">
+        <section class="content-section" data-stagger="fade.in">
             <h2>Who Made This</h2>
             <p>This system was developed by [Your Name/Team Name], a group of web developers passionate about creating
                 high-performance, visually appealing websites. We combined our expertise in Webflow, GSAP, and
@@ -217,7 +218,7 @@
     </main>
 
     <section class="cta">
-        <div class="container" data-stagger="children.bounce.left">
+        <div class="container" data-stagger="bounce.left">
             <h2>Want to Contribute?</h2>
             <p>We welcome contributions to improve and expand this system!</p>
             <button>Visit Our GitHub</button>
@@ -232,7 +233,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
-    <script src="/stagger.js"></script>
+    <script src="/stagger.js" type=module></script>
 </body>
 
 </html>
